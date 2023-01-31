@@ -1,1 +1,10 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  list-style: none;
+}
+
 @import './utils/colors.scss';
+@import './utils/grid.scss';
+@import './utils/fonts.scss';

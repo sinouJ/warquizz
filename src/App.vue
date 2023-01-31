@@ -1,16 +1,20 @@
 <script>
-import ButtonResponse from "./atoms/ButtonResponse.vue";
+import Title from "./atoms/Title.vue";
+import ButtonCta from "./atoms/ButtonCTA.vue";
 
 export default {
   components: {
-    ButtonResponse,
+    Title,
+    ButtonCta,
   },
 };
 </script>
 
 <template>
-  <div class="container">
-    <button-response index="A" response="Îles Malouines" />
+  <div class="container home">
+    <Title title="Bienvenue soldat" />
+
+    <button-cta text="Lancer une partie" />
   </div>
 </template>
 
@@ -20,5 +24,13 @@ export default {
 #app {
   height: 100vh;
   background-color: $background;
+
+  .home {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 }
 </style>

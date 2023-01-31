@@ -40,7 +40,7 @@ const FetchData = {
     //     return req
     // },
     getapi: async (path, headers) => {
-        const req = await fetch(url()+path, {
+        const req = await fetch(path, {
             headers
         })
 

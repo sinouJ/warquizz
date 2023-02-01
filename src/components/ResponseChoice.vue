@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="mt-2.5" v-for="choice in choices">
-            <button-response :index="choice" />
+            <button-response response="DefaultText response" :index="choice" />
         </div>
     </div>
 </template>

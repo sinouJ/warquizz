@@ -1,13 +1,19 @@
 <template>
     <div class="container game">
-        <Timer />
-        <ResponseChoice />
+        <Timer class="mt-12" />
+        <Question 
+            class="mt-12"
+            :index-question="1"
+            :max-index-question="10"
+        />
+        <ResponseChoice class="mt-12" />
     </div>
 </template>
 <script>
 import { FetchData } from '../utils/fetch'
 import ResponseChoice from '../components/ResponseChoice.vue'
 import Timer from '../components/Timer.vue'
+import Question from '../atoms/Question.vue'
 
 export default {
     name: 'GameView',
@@ -21,7 +27,8 @@ export default {
     },
     components: {
     ResponseChoice,
-    Timer
+    Timer,
+    Question
 }
 }
 </script>

@@ -11,6 +11,8 @@
 #app {
   height: 100vh;
   background-color: $background;
+  position: fixed;
+  inset: 0;
 
   .home {
     height: 100vh;

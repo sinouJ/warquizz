@@ -1,21 +1,8 @@
 <script>
-import Title from "./atoms/Title.vue";
-import ButtonCta from "./atoms/ButtonCTA.vue";
-
-export default {
-  components: {
-    Title,
-    ButtonCta,
-  },
-};
 </script>
 
 <template>
-  <div class="container home">
-    <Title title="Bienvenue soldat" />
-
-    <button-cta text="Lancer une partie" />
-  </div>
+  <router-view></router-view>
 </template>
 
 <style lang="scss">

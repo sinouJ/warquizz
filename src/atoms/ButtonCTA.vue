@@ -1,7 +1,9 @@
 <template>
-  <button class="w-40">
-    <p>{{ text }}</p>
-  </button>
+  <router-link to="/game">
+    <button class="w-40 mt-8">
+      <p>{{ text }}</p>
+    </button>
+  </router-link>
 </template>
 
 <script>

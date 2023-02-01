@@ -15,8 +15,7 @@ export default {
         }
     },
     async mounted() {
-        const apiRes = await FetchData.getapi('https://restcountries.com/v3.1/all')
-        this.countries = apiRes
+        this.countries = await FetchData.getapi('https://restcountries.com/v3.1/all')
     }
 }
 </script>

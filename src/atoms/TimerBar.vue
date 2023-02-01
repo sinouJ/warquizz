@@ -54,6 +54,7 @@ export default {
         }
 
         &.timer-bar {
+            transition: width ease 1.5s;
             background-color: $primary;
         }
     }

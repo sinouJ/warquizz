@@ -1,6 +1,6 @@
 <template>
     <div class="timer-bar">
-        <span class="background-bar w-64">
+        <span class="background-bar w-72">
             <span class="timer-bar" :style="`width: ${this.width}%`"></span>
         </span>
     </div>

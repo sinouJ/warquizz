@@ -51,7 +51,7 @@ export default {
 
     .time-container {
         display: flex;
-        justify-content: center;
+        justify-content: flex-start;
         width: 100%;
     }
 }

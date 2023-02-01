@@ -2,8 +2,8 @@
   <div class="contaier">
     <div class="question">
       <p>
-        <span class="font-semibold">
-          {{ indexQuestion }} / {{ maxIndexQuestion }}.
+        <span class="font-semibold mr-2">
+          <span class="color">{{ indexQuestion }}</span> / {{ maxIndexQuestion }}.
         </span>
         {{ question }}
       </p>
@@ -26,12 +26,19 @@ export default {
 </script>
 
 <style lang="scss">
-  .question {
+@import '../sass/style.scss';
+.question {
 
-    p {
+  p {
       color: white;
       font-size: 18px;
       font-family: 'Cabin', sans-serif;
-    }
+
+      span {
+        &.color {
+          color: $primary;
+        }
+      }
   }
+}
 </style>

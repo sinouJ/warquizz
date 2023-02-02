@@ -1,9 +1,12 @@
 <template>
-  <router-link to="/game">
+  <router-link v-if="toLink" :to="toLink">
     <button class="w-40 mt-8">
       <p>{{ text }}</p>
     </button>
   </router-link>
+  <button v-else @click="click" class="w-40 mt-8">
+    <p>{{ text }}</p>
+  </button>
 </template>
 
 <script>
@@ -11,7 +14,14 @@ export default {
   name: "ButtonCTA",
   props: {
     text: String,
+    toLink: String
   },
+  inheritAttrs: false,
+  methods: {
+    click: function () {
+      this.$emit('click')
+    }
+  }
 };
 </script>
 

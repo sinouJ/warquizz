@@ -1,7 +1,7 @@
 <template lang="">
     <div class="container home">
         <Title title="Bienvenue soldat" />
-        <button-cta text="Lancer une partie" />
+        <button-cta to-link="/game" text="Lancer une partie" />
     </div>
 </template>
 <script>

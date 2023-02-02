@@ -1,9 +1,11 @@
 <template>
     <div class="container game">
-        <Timer class="mt-12" />
-        <Flag class="mt-12" :flag="countries[1]?.flag" />
-        <Question class="mt-12" :index-question="1" :max-index-question="10" />
-        <ResponseChoice class="mt-12" />
+        <Score :score="30"/>
+        <Timer class="mt-5" />
+        <Flag class="mt-8" :flag="countries[1]?.flag" />
+        <Question class="mt-8" :index-question="1" :max-index-question="10" />
+        <ResponseChoice class="mt-5" />
+        <button-cta text="Next"/>
     </div>
 </template>
 <script>
@@ -12,6 +14,8 @@ import ResponseChoice from '../components/ResponseChoice.vue'
 import Timer from '../components/Timer.vue'
 import Question from '../atoms/Question.vue'
 import Flag from '../atoms/Flag.vue'
+import Score from '../components/Score.vue'
+import ButtonCta from '../atoms/ButtonCTA.vue'
 
 export default {
     name: 'GameView',
@@ -27,7 +31,9 @@ export default {
     ResponseChoice,
     Timer,
     Question,
-    Flag
+    Flag,
+    Score,
+    ButtonCta
 }
 }
 </script>

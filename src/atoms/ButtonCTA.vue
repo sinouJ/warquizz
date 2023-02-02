@@ -14,12 +14,12 @@ export default {
   name: "ButtonCTA",
   props: {
     text: String,
-    toLink: String
+    toLink: String,
   },
   inheritAttrs: false,
   methods: {
-    click: function () {
-      this.$emit('click')
+    click: function (id) {
+      this.$emit('click', id)
     }
   }
 };

@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="mt-2.5" v-for="(choice, id) in choices">
-            <button-response :response="choice" :index="`${id+1}`" />
+            <button-response :response="choice.response" @click="click(id)" :index="`${id+1}`" />
         </div>
     </div>
 </template>
@@ -20,6 +20,11 @@ export default {
                 'Default response text',
                 'Default response text',
             ]
+        }
+    },
+    methods: {
+        click: function (id) {
+            this.$emit('click', id)
         }
     },
     components: {

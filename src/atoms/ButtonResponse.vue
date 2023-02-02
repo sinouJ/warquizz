@@ -1,5 +1,5 @@
 <template>
-  <button>
+  <button @click.stop="click">
     <p class="semibold">{{ index }}.</p>
     <p>{{ response }}</p>
   </button>
@@ -12,6 +12,12 @@ export default {
     response: String,
     index: String,
   },
+  inheritAttrs: false,
+  methods: {
+    click: function () {
+      this.$emit('click')
+    }
+  }
 };
 </script>
 

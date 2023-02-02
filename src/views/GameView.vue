@@ -5,8 +5,8 @@
         <Flag class="mt-8" :flag="currentQuestion?.flag" />
         <Question class="mt-8" question="Quel est ce drapeau ?" :index-question="indexQuestion"
             :max-index-question="maxIndexQuestion" />
-        <ResponseChoice :choices="choices" class="mt-5" />
-        <button-cta @click="validAnswer()" text="Suivant" />
+        <ResponseChoice @click="setAnswer" :choices="choices" class="mt-5" />
+        <button-cta @click="validAnswer" text="Suivant" />
     </div>
 </template>
 <script>
@@ -28,9 +28,7 @@ export default {
             indexQuestion: 1,
             maxIndexQuestion: 10,
             score: 0,
-            choices: [
-
-            ]
+            choices: [],
         }
     },
     methods: {
@@ -42,32 +40,52 @@ export default {
         shuffleArray: function (array) {
             array.sort(() => 0.5 - Math.random())
         },
+        setAnswer: function (id) {
+            if (id == this.choices.findIndex(choice => choice.valid === true)) {
+                this.score++
+            }
+            this.indexQuestion++
+            this.setQuestion()
+            return
+        },
+        setQuestion: function () {
+            this.currentQuestion = this.questions[this.indexQuestion - 1]
+            this.choices = []
+            this.choices.push({ response: this.questions[this.indexQuestion - 1].translations.fra.common, valid: true })
+            this.countries = this.countries.filter(country => country.translations.fra.common != this.choices[0].response)
+            const tempArray = [
+                { response: this.countries[0].translations.fra.common, valid: false },
+                { response: this.countries[1].translations.fra.common, valid: false },
+                { response: this.countries[2].translations.fra.common, valid: false },
+            ]
+            this.choices.push(...tempArray)
+            this.shuffleArray(this.choices)
+        }
+
     },
     async mounted() {
-        this.countries = await FetchData.getapi('https://restcountries.com/v3.1/all?fields=name,flag')
+        this.countries = await FetchData.getapi('https://restcountries.com/v3.1/all?fields=translations,flag')
         this.shuffleArray(this.countries)
         this.questions = this.countries.slice(0, this.maxIndexQuestion)
         this.currentQuestion = this.questions[0]
-        // filtrer le tableau total et retirer la bonne réponse
-        // push 3x des noms au hasard entre 0 et max length du tableau sans la bonne réponse
-        this.choices.push(this.questions[0].name.common)
-        this.countries = this.countries.filter(country => country.name.common != this.choices[0])
+        this.choices.push({ response: this.questions[0].translations.fra.common, valid: true })
+        this.countries = this.countries.filter(country => country.translations.fra.common != this.choices[0].response)
         const tempArray = [
-            this.countries[0].name.common,
-            this.countries[1].name.common,
-            this.countries[2].name.common
+            { response: this.countries[0].translations.fra.common, valid: false },
+            { response: this.countries[1].translations.fra.common, valid: false },
+            { response: this.countries[2].translations.fra.common, valid: false },
         ]
         this.choices.push(...tempArray)
         this.shuffleArray(this.choices)
     },
     components: {
-    ResponseChoice,
-    Timer,
-    Question,
-    Flag,
-    Score,
-    ButtonCta
-}
+        ResponseChoice,
+        Timer,
+        Question,
+        Flag,
+        Score,
+        ButtonCta
+    }
 }
 </script>
 <style lang="scss">

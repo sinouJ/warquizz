@@ -1,7 +1,7 @@
 <template>
     <div>
-        <div class="mt-2.5" v-for="choice in choices">
-            <button-response response="DefaultText response" :index="choice" />
+        <div class="mt-2.5" v-for="(choice, id) in choices">
+            <button-response :response="choice" :index="`${id+1}`" />
         </div>
     </div>
 </template>
@@ -11,9 +11,15 @@ import ButtonResponse from '../atoms/ButtonResponse.vue';
 
 export default {
     name: 'ResponseChoice',
-    data() {
-        return {
-            choices: ['A', 'B', 'C', 'D']
+    props: {
+        choices: {
+            type: Array,
+            default: [
+                'Default response text',
+                'Default response text',
+                'Default response text',
+                'Default response text',
+            ]
         }
     },
     components: {

@@ -1,7 +1,7 @@
 <template>
-    <div class="container flag">
+    <div class="flag">
         <div>
-            <p>{{ flag }}</p>
+            <p class="text-9xl">{{ flag }}</p>
         </div>
     </div>
 </template>
@@ -16,5 +16,9 @@ export default {
 </script>
 
 <style lang="scss">
-    
+.flag {
+            p {
+                text-align: center;
+            }
+        }
 </style>

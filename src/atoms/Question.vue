@@ -1,5 +1,5 @@
 <template>
-  <div class="contaier">
+  <div>
     <div class="question">
       <p>
         <span class="font-semibold mr-2">

@@ -1,58 +1,59 @@
 <template>
-    <div class="timer">
-        <div class="time-container">
-
-            <Time :time="decrementTime" />
-        </div>
-        <TimerBar :max-time="maxTime" :interval="interval" />
+  <div class="timer">
+    <div class="time-container">
+      <Time :time="remainingTime" />
     </div>
+    <TimerBar :time="time" :max-time="maxTime" :interval="interval" />
+  </div>
 </template>
 
 <script>
-import TimerBar from '../atoms/TimerBar.vue'
-import Time from '../atoms/Time.vue';
+import TimerBar from "../atoms/TimerBar.vue";
+import Time from "../atoms/Time.vue";
 
 export default {
-    name: "Timer",
-    props: {
-        maxTime: {
-            type: Number,
-            default: 30000
-        },
-        interval: {
-            type: Number,
-            default: 1000
-        }
+  name: "Timer",
+  props: {
+    maxTime: {
+      type: Number,
+      default: 30000,
     },
-    data() {
-        return {
-            decrementTime: this.maxTime,
-            incrementTime: 0
-        }
+    remainingTime: {
+      type: Number,
+      default: 30000,
     },
-    mounted() {
-        const setTimer = setInterval(() => {
-            this.decrementTime -= this.interval
-            this.incrementTime += this.interval
-            if (this.incrementTime === this.maxTime) clearInterval(setTimer)
-        }, this.interval);
+    time: {
+      type: Number,
+      default: 0,
     },
-    components: { TimerBar, Time }
-}
+    interval: {
+      type: Number,
+      default: 1000,
+    },
+  },
+  mounted() {
+    // const setTimer = setInterval(() => {
+    //     this.decrementTime -= this.interval
+    //     this.incrementTime += this.interval
+    //     if (this.incrementTime === this.maxTime) clearInterval(setTimer)
+    // }, this.interval);
+  },
+  components: { TimerBar, Time },
+};
 </script>
 
 <style lang="scss">
-@import '../sass/style.scss';
+@import "../sass/style.scss";
 
 .timer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
-    .time-container {
-        display: flex;
-        justify-content: flex-start;
-        width: 100%;
-    }
+  .time-container {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+  }
 }
 </style>

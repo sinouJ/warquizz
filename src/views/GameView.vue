@@ -1,12 +1,17 @@
 <template>
     <div class="container game">
         <Score :score="score" />
-        <Timer class="mt-5" />
-        <Flag class="mt-8" :flag="currentQuestion?.flag" />
-        <Question class="mt-8" question="Quel est ce drapeau ?" :index-question="indexQuestion"
-            :max-index-question="maxIndexQuestion" />
-        <ResponseChoice @click="setAnswer" :choices="choices" class="mt-5" />
-        <button-cta @click="validAnswer" text="Suivant" />
+        <div v-if="indexQuestion <= 10">
+            <Timer class="mt-5" />
+            <Flag class="mt-8" :flag="currentQuestion?.flag" />
+            <Question class="mt-8" question="Quel est ce drapeau ?" :index-question="indexQuestion"
+                :max-index-question="maxIndexQuestion" />
+            <ResponseChoice @click="setAnswer" :choices="choices" class="mt-5" />
+            <button-cta @click="validAnswer" text="Suivant" />
+        </div>
+        <div class="flex justify-center" v-else>
+            <button-cta text="Rejouer" />
+        </div>
     </div>
 </template>
 <script>

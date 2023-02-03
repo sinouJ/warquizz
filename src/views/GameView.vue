@@ -57,6 +57,7 @@ export default {
             this.currentQuestion = this.questions[this.indexQuestion - 1]
             this.choices = []
             this.choices.push({ response: this.questions[this.indexQuestion - 1].translations.fra.common, valid: true })
+            this.shuffleArray(this.countries)
             this.countries = this.countries.filter(country => country.translations.fra.common != this.choices[0].response)
             const tempArray = [
                 { response: this.countries[0].translations.fra.common, valid: false },
@@ -72,16 +73,7 @@ export default {
         this.countries = await FetchData.getapi('https://restcountries.com/v3.1/all?fields=translations,flag')
         this.shuffleArray(this.countries)
         this.questions = this.countries.slice(0, this.maxIndexQuestion)
-        this.currentQuestion = this.questions[0]
-        this.choices.push({ response: this.questions[0].translations.fra.common, valid: true })
-        this.countries = this.countries.filter(country => country.translations.fra.common != this.choices[0].response)
-        const tempArray = [
-            { response: this.countries[0].translations.fra.common, valid: false },
-            { response: this.countries[1].translations.fra.common, valid: false },
-            { response: this.countries[2].translations.fra.common, valid: false },
-        ]
-        this.choices.push(...tempArray)
-        this.shuffleArray(this.choices)
+        this.setQuestion()
     },
     components: {
         ResponseChoice,

@@ -15,8 +15,13 @@
         :index-question="indexQuestion"
         :max-index-question="maxIndexQuestion"
       />
-      <ResponseChoice @click="setAnswer" :choices="choices" class="mt-5" />
-      <button-cta @click="validAnswer" text="Suivant" />
+      <ResponseChoice
+        :isAnswerRevealed="isAnswerRevealed"
+        @click="setAnswer"
+        :choices="choices"
+        class="mt-5"
+      />
+      <button-cta v-if="isAnswerRevealed" @click="validAnswer" text="Suivant" />
     </div>
     <div class="flex justify-center" v-else>
       <button-cta text="Rejouer" />
@@ -47,6 +52,7 @@ export default {
       interval: 1000,
       time: 0,
       remainingTime: 30000,
+      isAnswerRevealed: false,
     };
   },
   methods: {
@@ -62,8 +68,10 @@ export default {
       if (id == this.choices.findIndex((choice) => choice.valid === true)) {
         this.score++;
       }
-      this.indexQuestion++;
-      this.setQuestion();
+      this.isAnswerRevealed = !this.isAnswerRevealed;
+      //   this.indexQuestion++;
+      //   this.setQuestion();
+      //   this.resetTime();
       return;
     },
     setQuestion: function () {
@@ -73,15 +81,28 @@ export default {
         response:
           this.questions[this.indexQuestion - 1].translations.fra.common,
         valid: true,
+        selected: false,
       });
       this.shuffleArray(this.countries);
       this.countries = this.countries.filter(
         (country) => country.translations.fra.common != this.choices[0].response
       );
       const tempArray = [
-        { response: this.countries[0].translations.fra.common, valid: false },
-        { response: this.countries[1].translations.fra.common, valid: false },
-        { response: this.countries[2].translations.fra.common, valid: false },
+        {
+          response: this.countries[0].translations.fra.common,
+          valid: false,
+          selected: false,
+        },
+        {
+          response: this.countries[1].translations.fra.common,
+          valid: false,
+          selected: false,
+        },
+        {
+          response: this.countries[2].translations.fra.common,
+          valid: false,
+          selected: false,
+        },
       ];
       this.choices.push(...tempArray);
       this.shuffleArray(this.choices);
@@ -92,6 +113,12 @@ export default {
         this.time += this.interval;
         if (this.time === this.maxTime) clearInterval(updateTimer);
       }, this.interval);
+    },
+    validAnswer: function () {
+      this.setQuestion();
+    },
+    revealAnswer: function () {
+      this.isNextButtonDisplayed = true;
     },
     resetTime: function () {
       this.time = 0;

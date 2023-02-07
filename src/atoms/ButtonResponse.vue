@@ -1,5 +1,5 @@
 <template>
-  <button @click.stop="click">
+  <button :class="isAnswerRevealed && isCorrect ? 'succes' : ''" @click.stop="click">
     <p class="semibold">{{ index }}.</p>
     <p>{{ response }}</p>
   </button>
@@ -11,6 +11,15 @@ export default {
   props: {
     response: String,
     index: String,
+    selected: {
+      type: Boolean,
+      default: false
+    },
+    isCorrect: Boolean,
+    isAnswerRevealed: {
+      type: Boolean,
+      default: false
+    }
   },
   inheritAttrs: false,
   methods: {
@@ -36,6 +45,10 @@ button {
   align-items: center;
   justify-content: flex-start;
   border-radius: $radius;
+
+  &.succes {
+    background-color: $success;
+  }
 
   p {
     &:last-child {

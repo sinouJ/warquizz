@@ -1,38 +1,46 @@
 <template>
-    <div>
-        <div class="mt-2.5" v-for="(choice, id) in choices">
-            <button-response :response="choice.response" @click="click(id)" :index="`${id+1}`" />
-        </div>
+  <div>
+    <div class="mt-2.5" v-for="(choice, id) in choices" :key="id">
+      <button-response
+        :response="choice.response"
+        @click="click(id)"
+        :index="`${id + 1}`"
+        :isAnswerRevealed="isAnswerRevealed"
+        :isCorrect="choice.valid"
+      />
     </div>
+  </div>
 </template>
 
 <script>
-import ButtonResponse from '../atoms/ButtonResponse.vue';
+import ButtonResponse from "../atoms/ButtonResponse.vue";
 
 export default {
-    name: 'ResponseChoice',
-    props: {
-        choices: {
-            type: Array,
-            default: [
-                'Default response text',
-                'Default response text',
-                'Default response text',
-                'Default response text',
-            ]
-        }
+  name: "ResponseChoice",
+  props: {
+    choices: {
+      type: Array,
+      default: [
+        "Default response text",
+        "Default response text",
+        "Default response text",
+        "Default response text",
+      ],
     },
-    methods: {
-        click: function (id) {
-            this.$emit('click', id)
-        }
+    isAnswerRevealed: {
+      type: Boolean,
+      default: false,
     },
-    components: {
-        ButtonResponse
-    }
-}
+  },
+  methods: {
+    click: function (id) {
+      this.$emit("click", id);
+    },
+  },
+  components: {
+    ButtonResponse,
+  },
+};
 </script>
 
-<style lang="scss">
-
-</style>
+<style lang="scss"></style>
